@@ -1,4 +1,4 @@
-package testy;
+package macierze;
 
 import java.util.Random;
 

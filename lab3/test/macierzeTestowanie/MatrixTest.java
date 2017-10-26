@@ -1,4 +1,4 @@
-package testy;
+package macierzeTestowanie;
 
 import org.junit.Test;
 
@@ -7,6 +7,8 @@ import static org.junit.Assert.*;
 public class MatrixTest {
     @Test
     public void getRows() throws Exception {
+        Matrix m = new Matrix(2, 3);
+        assertEquals(m.getRows(),2);
     }
 
     @Test

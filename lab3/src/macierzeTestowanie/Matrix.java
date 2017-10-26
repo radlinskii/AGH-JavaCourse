@@ -1,4 +1,4 @@
-package testy;
+package macierzeTestowanie;
 
 import java.util.Random;
 
@@ -262,5 +262,6 @@ public class Matrix {
 
         System.out.println(Matrix.random(3,3));
         System.out.println(Matrix.eye(3));
+        System.out.println("wooo");
     }
 }

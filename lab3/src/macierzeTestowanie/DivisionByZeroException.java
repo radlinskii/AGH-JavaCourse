@@ -1,4 +1,4 @@
-package testy;
+package macierzeTestowanie;
 
 public class DivisionByZeroException extends Exception {
     public DivisionByZeroException(String reason, String statement){
