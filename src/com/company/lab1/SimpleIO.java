@@ -1,15 +1,15 @@
-package com.company;
+package com.company.lab1;
 
 import java.util.Scanner;
 
-public class Main {
+public class SimpleIO {
 
     public static void main(String[] args) {
-	// write your code here
+        // write your code here
         Scanner scan = new Scanner(System.in);
         String s = scan.next();
         int i = scan.nextInt();
-        double d = scan.nextDouble();
-        System.out.printf("Wczytano %s , %d, %f",s,i,d);
+        System.out.printf("Wczytano %s , %d",s,i);
     }
+
 }
