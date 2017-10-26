@@ -1,4 +1,4 @@
-package com.company.lab2;
+package testy;
 
 import java.util.Random;
 
