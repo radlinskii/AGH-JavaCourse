@@ -5,10 +5,16 @@ import static org.junit.Assert.*;
 public class MatrixTest {
     @org.junit.Test
     public void getRows() throws Exception {
+        Matrix m = new Matrix(2,3);
+        assertEquals(m.getRows(),2);
+        assertNotEquals(m.getRows(),3);
     }
 
     @org.junit.Test
     public void getCols() throws Exception {
+        Matrix m = new Matrix(2,3);
+        assertEquals(m.getCols(),3);
+        assertNotEquals(m.getCols(),2);
     }
 
     @org.junit.Test
