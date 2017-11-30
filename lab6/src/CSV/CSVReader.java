@@ -34,15 +34,22 @@ public class CSVReader {
     //...
 
     CSVReader(String filename, String delimeter) throws IOException {
-        this(filename, delimeter, false);
+        this(filename, delimeter, true);
     }
 
     CSVReader(String filename) throws IOException {
-        this(filename, ",");
+        this(filename, ",",true);
     }
 
 
 
+
+    String[]current;
+    boolean next(){
+        // czyta następny wiersz, dzieli na elementy i przypisuje do current
+        //
+        return false;
+    }
 
     void parseHeader() throws IOException {
         // wczytaj wiersz
@@ -53,39 +60,19 @@ public class CSVReader {
         // podziel na pola
         String[] header = line.split(delimiter);
         // przetwarzaj dane w wierszu
-        for(int i = 0; i < header.length; i++){
+
+        for (int i = 0; i < header.length; i++) {
+            // dodaj nazwy kolumn do columnLabels i numery do columnLabelsToInt
             columnLabels.add(header[i]);
             columnLabelsToInt.put(header[i],i);
         }
-
     }
 
-    String[]current;
-    boolean next(){
-        // czyta następny wiersz, dzieli na elementy i przypisuje do current
-        //
-        return false;
+    List<String> getColumnLabels(){
+        return columnLabels;
     }
 
-    public static void main(String[] args) throws IOException {
-        CSVReader reader = new CSVReader("titanic-part.csv",",",true);
-        while(reader.next()){
-            int id = reader.getInt("PassengerId");
-            String name = reader.get("Name");
-            double fare = reader.getDouble("Fare");
-
-            System.out.printf("%d %s %f",id, name, fare);
-        }
-
-
-        CSVReader reader2 = new CSVReader("titanic-part.csv",",",true);
-        while(reader2.next()){
-            int id = reader2.getInt(0);
-            String name = reader2.get(3);
-            double fare = reader2.getDouble(9);
-            System.out.printf("%d %s %f",id, name, fare);
-
-        }
-
+    int getRecordLength() {
+        return 0;
     }
 }
