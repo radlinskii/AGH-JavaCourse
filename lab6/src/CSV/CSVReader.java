@@ -130,20 +130,17 @@ public class CSVReader {
 
     public static void main(String[] args) throws IOException {
         CSVReader reader = new CSVReader("accelerator.csv",";",true);
-        reader.columnLabelsToInt.get(1);
-        System.out.println(reader.columnLabelsToInt.get(7));
         while(reader.next()){
-            System.out.println("o");
             int id = 0;
             double fare = 0.0;
             try {
-                //id = reader.getInt(0);
-                fare = reader.getDouble(2);
+                id = reader.getInt("label");
+                fare = reader.getDouble("X");
             } catch (EmptyFieldException e) {
                 e.printStackTrace();
             }
-            String name = reader.get(6);
-            System.out.printf(Locale.US,"%d %s %f",id, name, fare);
+            String name = reader.get("latitude");
+            System.out.printf(Locale.US,"%d %f %s \n",id, fare, name);
         }
     }
 }
