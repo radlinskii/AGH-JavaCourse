@@ -7,24 +7,22 @@ import java.io.Reader;
 import java.util.*;
 
 public class CSVReader {
-    BufferedReader reader;
-    String delimiter;
-    boolean hasHeader;
-    String[] current;
+    private BufferedReader reader;
+    private String delimiter;
+    private boolean hasHeader;
+    private String[] current;
 
-    // nazwy kolumn w takiej kolejności, jak w pliku
-    List<String> columnLabels = new ArrayList<>();
-    // odwzorowanie: nazwa kolumny -> numer kolumny
-    Map<String, Integer> columnLabelsToInt = new HashMap<>();
+    private List<String> columnLabels = new ArrayList<>();
+    private Map<String, Integer> columnLabelsToInt = new HashMap<>();
 
-    public CSVReader(Reader reader, String delimiter, boolean hasHeader) throws IOException {
+    private CSVReader(Reader reader, String delimiter, boolean hasHeader) throws IOException {
         this.reader = new BufferedReader(reader);
         this.delimiter = delimiter;
         this.hasHeader = hasHeader;
         if (hasHeader) parseHeader();
     }
 
-    public CSVReader(String filename, String delimiter, boolean hasHeader) throws IOException {
+    CSVReader(String filename, String delimiter, boolean hasHeader) throws IOException {
         this(new FileReader(filename), delimiter, hasHeader);
     }
 
@@ -36,27 +34,27 @@ public class CSVReader {
         this(filename, ",", true);
     }
 
-    boolean isMissing(int columnIndex) {
+    private boolean isMissing(int columnIndex) {
         return columnIndex >= current.length || current[columnIndex].equals("");
 
     }
 
-    boolean isMissing(String column) {
+    private boolean isMissing(String column) {
         int colNum = columnLabelsToInt.get(column);
         return current.length <= colNum || current[colNum].equals("");
     }
 
-    public int getInt(String element)  {
+    int getInt(String element) {
         if (isMissing(element))
             return -1;
         return Integer.parseInt(current[columnLabelsToInt.get(element)]);
     }
 
-    public String get(String element) {
+    String get(String element) {
         return isMissing(element) ? "" : current[columnLabelsToInt.get(element)];
     }
 
-    public double getDouble(String element) {
+    double getDouble(String element) {
         if (isMissing(element))
             return -1;
         return Double.parseDouble(current[columnLabelsToInt.get(element)]);
@@ -92,35 +90,24 @@ public class CSVReader {
 
 
     boolean next() throws IOException {
-        // czyta następny wiersz, dzieli na elementy i przypisuje do current
-        //
-
         String line = reader.readLine();
         if (line == null)
             return false;
         else {
-            current = line.split(delimiter);
-
-            for (int i = 0; i < current.length; i++) {
-                System.out.print(" " + current[i]);
-            }
+            current = line.split(delimiter + "(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
             return true;
         }
 
     }
 
-    void parseHeader() throws IOException {
-        // wczytaj wiersz
+    private void parseHeader() throws IOException {
         String line = reader.readLine();
         if (line == null) {
             return;
         }
-        // podziel na pola
-        String[] header = line.split(delimiter);
-        // przetwarzaj dane w wierszu
+        String[] header = line.split(delimiter + "(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 
         for (int i = 0; i < header.length; i++) {
-            // dodaj nazwy kolumn do columnLabels i numery do columnLabelsToInt
             columnLabels.add(header[i]);
             columnLabelsToInt.put(header[i], i);
         }
