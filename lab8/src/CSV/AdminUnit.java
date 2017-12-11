@@ -30,6 +30,11 @@ public class AdminUnit {
     }
 
     private AdminUnit parent;
+
+    public BoundingBox getBox() {
+        return box;
+    }
+
     BoundingBox box = new BoundingBox();
     List<AdminUnit> children = new ArrayList<>();
 
@@ -78,4 +83,8 @@ public class AdminUnit {
         }
     }
 
+
+    public int getAdminLevel() {
+        return adminLevel;
+    }
 }

@@ -98,7 +98,7 @@ public class BoundingBox {
      */
     double getCenterX() throws CantCenterEmptyBoundingBox{
         if(!isEmpty()){
-            return (xmax - xmin)/2 ;
+            return xmax-((xmax - xmin)/2);
         } else
             throw new CantCenterEmptyBoundingBox("Empty on Xcenter");
     }
@@ -109,7 +109,7 @@ public class BoundingBox {
      */
     double getCenterY() throws CantCenterEmptyBoundingBox {
         if(!isEmpty()){
-            return (xmax - xmin)/2 ;
+            return ymax-((ymax - ymin)/2);
         } else
             throw new CantCenterEmptyBoundingBox("Empty on Ycenter");
     }
@@ -122,13 +122,23 @@ public class BoundingBox {
      * (ang. haversine formula)
      */
     double distanceTo(BoundingBox bbx) throws CantCenterEmptyBoundingBox {
-        return Math.sqrt(Math.pow(getCenterX()-bbx.getCenterX(),2)
-                + Math.pow(getCenterY()-bbx.getCenterY(),2));
+        return Math.sqrt(Math.pow((getCenterX()-bbx.getCenterX()),2)
+                + Math.pow((getCenterY()-bbx.getCenterY()),2))*111;
     }
 
     @Override
     public String toString(){
         return "\n" + " xmax: " + xmax.toString() + " ymax: " + ymax.toString() + " xmin: " + xmin.toString() + " ymin: " + ymin.toString();
+    }
+
+    String toLINESTRING(){
+        return "LINESTRING(" +
+                xmax + " " + ymax + ", " +
+                xmax + " " + ymin + ", " +
+                xmin + " " + ymin + ", " +
+                xmin + " " + ymax + ", " +
+                xmax + " " + ymax + ")";
+
     }
 
 }
