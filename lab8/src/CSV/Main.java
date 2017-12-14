@@ -2,11 +2,14 @@ package CSV;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.function.DoubleConsumer;
 
 public class Main {
     public static void main(String[] args) throws CantCenterEmptyBoundingBox {
-        AdminUnitList a = new AdminUnitList();
+        /*AdminUnitList a = new AdminUnitList();
         try {
             a.read("admin-units.csv");
         } catch (IOException e) {
@@ -43,5 +46,65 @@ public class Main {
         } catch (CantCenterEmptyBoundingBox cantCenterEmptyBoundingBox) {
             cantCenterEmptyBoundingBox.printStackTrace();
         }
+
+*/
+
+        double arr [] = {1.49,1.51,1.55,1.49,1.46,1.47,1.48,1.47,1.42,1.47};
+        double arrayLength = arr.length;
+        double pi = 3.14;
+        double l = 0.55;
+        double UOdEl = 0.00058;
+
+        System.out.println("l = " + l);
+        System.out.println("U(l) = " + UOdEl);
+
+        double sum = 0;
+        for (double anArr : arr) {
+            sum += anArr;
+        }
+
+        double mean = sum/arrayLength;
+        System.out.println("T = " + mean);
+
+        double squareSumDiff = 0;
+
+        for (double anArr : arr) {
+            squareSumDiff += Math.pow(anArr - mean,2);
+            //System.out.println(String.format( "%.4f", squareSumDiff));
+        }
+
+        double niepewnoscT = Math.sqrt(squareSumDiff/(arrayLength*(arrayLength-1)));
+        System.out.println("U(T) = " + niepewnoscT);
+
+
+        double UcOdG = Math.sqrt(
+                (64*Math.pow(pi,4)*Math.pow(l,2))*(Math.pow(niepewnoscT,2))/Math.pow(mean,6) + 16*Math.pow(pi,4)*Math.pow(UOdEl,2)/Math.pow(mean,2)
+        );
+
+        System.out.println(
+                "Uc(g) = " + UcOdG
+        );
+
+        double g = 4*Math.pow(pi,2)*l/Math.pow(mean,2);
+        System.out.println("g = " + g);
+        double bladBzwgzldny = Math.abs(9.811-g);
+        System.out.println("blad bezwzgledny = " + bladBzwgzldny);
+        System.out.println("blad wzgledny = " + String.format( "%.2f", bladBzwgzldny/g*100) + "%");
+        boolean o = 2*UcOdG > bladBzwgzldny;
+        System.out.println("Czy blad bezwzgledny jest mniejszy od U(g) [Uc(g)*2] ?? " + o);
+
+        List<Double> arr2 = new ArrayList<>();
+        int i =0;
+        for(double el : arr){
+            arr2.add(Math.pow(el,2));
+            //System.out.println(arr2.get(i));
+            i++;
+        }
+
+
+        DoubleConsumer dc = (p) -> System.out.println(p+"ojojoj");
+
+        dc.accept(2.43);
+
     }
 }
