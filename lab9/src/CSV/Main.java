@@ -56,5 +56,16 @@ public class Main {
                         p.getParent().getName().equals("województwo małopolskie"))
                 .list(out);
         out.println();
+
+        AdminUnitList list = a;
+
+        AdminUnitQuery query = new AdminUnitQuery()
+                .selectFrom(list)
+                .where(el -> el.getParent().getName().contains("Wielka Wie"))
+                .sort((el1, el2) -> (el1.getName().compareTo(el2.getName())))
+                .limit(3);
+        query.execute().list(out);
+
+
     }
 }
