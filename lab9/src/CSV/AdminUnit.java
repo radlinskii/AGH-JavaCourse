@@ -40,9 +40,11 @@ public class AdminUnit {
         return box;
     }
 
+
+
     BoundingBox box = new BoundingBox();
     List<AdminUnit> children = new ArrayList<>();
-
+    List<AdminUnit> neighbours = new ArrayList<>();
     AdminUnit(String name, double area, int admin_level, double population, double density) {
         this.name = name;
         this.area = area;

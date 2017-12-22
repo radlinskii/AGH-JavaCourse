@@ -49,7 +49,8 @@ public class Main {
 
 */
 
-        double arr [] = {1.49,1.51,1.55,1.49,1.46,1.47,1.48,1.47,1.42,1.47};
+        double arr [] = {1.338,1.322,1.32,1.3263,1.32,1.32,1.328,1.3287,1.3257,1.3247};
+        /*double arr [] = {1.026,1.032,1.03,1.036,1.039,1.032,1.03,1.027,1.039,1.039};*/
         double arrayLength = arr.length;
         double pi = 3.14;
         double l = 0.55;
@@ -62,6 +63,13 @@ public class Main {
         for (double anArr : arr) {
             sum += anArr;
         }
+
+
+        System.out.println(" ");
+        for (double anArr : arr) {
+            System.out.print(anArr * 30 + " ");
+        }
+        System.out.println(" ");
 
         double mean = sum/arrayLength;
         System.out.println("T = " + mean);
@@ -101,10 +109,45 @@ public class Main {
             i++;
         }
 
+        double a = 1.54*Math.pow(10,-5);
+        pi = 3.14;
+        double dKwadrat = Math.pow(0.00071,2);
+        l = 1.063;
+        double E0 = 200000000000.0;
+        //dKwadrat=(4*l)/(a*E0*pi);
+        double E = (4*l)/(3.14*a*dKwadrat);
+        System.out.println(E0 + "\n" + E + "\n" + l + "\n" + Math.sqrt(dKwadrat));
+        System.out.println(Math.abs(E0-E)/E0*100 + " %");
+        //9.68*10^(-4)
 
-        DoubleConsumer dc = (p) -> System.out.println(p+"ojojoj");
+        a = 1.52*Math.pow(10,-5);
+        dKwadrat=Math.pow(0.00118,2);
+        pi = 3.14;
+        //double dKwadrat = Math.pow(0.00066,2);
+        l = 1.063;
+        E0 = 95000000000.0;
+        //dKwadrat=(4*l)/(a*E0*pi);
+        E = (4*l)/(3.14*a*dKwadrat);
+        System.out.println("\n mosiadz \n" + E0 + "\n" + E + "\n" + l + "\n" + Math.sqrt(dKwadrat));
+        System.out.println(Math.abs(E0-E)/E0*100 + " %");
 
-        dc.accept(2.43);
+        System.out.println(
+                Math.sqrt(
+                        Math.pow(0.00058/1.063,2) +
+                        Math.pow(2*0.0000058/0.00071,2) +
+                        Math.pow(2.18*Math.pow(10,-7)/(1.54*Math.pow(10,-5)),2)
+                )
+        );
+
+        System.out.println(
+                Math.sqrt(
+                                Math.pow(0.00058/1.063,2) +
+                                Math.pow(2*0.0000058/0.00118,2) +
+                                Math.pow(6.9*Math.pow(10,-7)/(1.56*Math.pow(10,-5)),2)
+                )
+        );
+
+
 
     }
 }

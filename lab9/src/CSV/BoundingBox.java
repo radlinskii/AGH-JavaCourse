@@ -54,8 +54,8 @@ public class BoundingBox {
      * @param bb
      * @return
      */
-    boolean contains(BoundingBox bb){
-        return ((bb.xmax<=xmax) && (bb.xmin >= xmin) && (ymax >= bb.ymax) && (ymin <= bb.ymin));
+    boolean contains(BoundingBox bb) {
+        return ((bb.xmax <= xmax) && (bb.xmin >= xmin) && (ymax >= bb.ymax) && (ymin <= bb.ymin));
     }
 
     /**

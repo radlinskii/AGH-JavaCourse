@@ -158,6 +158,18 @@ class AdminUnitList {
         return neighbors;
     }
 
+    void getNeighbors(AdminUnit unit, AdminUnit target, double maxDistance) throws CantCenterEmptyBoundingBox{
+        if(unit.getParent()== null)
+            return;
+        getNeighbors(unit.getParent(), target, maxDistance);
+        for(AdminUnit sibling: unit.getParent().getChildren()){
+            System.out.println(sibling.getName());
+            if((sibling.getBox().intersects(target.getBox()) || (sibling.getBox().distanceTo(target.getBox()) < maxDistance)) && sibling.getAdminLevel() == target.getAdminLevel()){
+                target.neighbours.add(sibling);
+            }
+        }
+    }
+
 
 
 
