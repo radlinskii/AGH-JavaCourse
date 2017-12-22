@@ -218,5 +218,33 @@ class AdminUnitList {
         return adminUnitList;
     }
 
+    /**
+     * Zwraca co najwyżej limit elementów spełniających pred
+     * @param pred - predykat
+     * @param limit - maksymalna liczba elementów
+     * @return nową listę
+     */
+    AdminUnitList filter(Predicate<AdminUnit> pred, int limit){
+        AdminUnitList newList = new AdminUnitList();
+        newList.units = new ArrayList<AdminUnit>(this.units);
+        newList.units = units.stream().filter(pred).limit(limit).collect(Collectors.toList());
+        return newList;
+    }
+
+    /**
+     * Zwraca co najwyżej limit elementów spełniających pred począwszy od offset
+     * Offest jest obliczany po przefiltrowaniu
+     * @param pred - predykat
+     * @param - od którego elementu
+     * @param limit - maksymalna liczba elementów
+     * @return nową listę
+     */
+    AdminUnitList filter(Predicate<AdminUnit> pred, int offset, int limit){
+        AdminUnitList newList = new AdminUnitList();
+        newList.units = new ArrayList<AdminUnit>(this.units);
+        newList.units = units.stream().filter(pred).skip(offset).limit(limit).collect(Collectors.toList());
+        return newList;
+    }
+
 
 }
