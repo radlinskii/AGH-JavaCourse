@@ -7,7 +7,7 @@ public class Main {
         // write your code here
         JFrame frame = new JFrame("Choinka");
         frame.setContentPane(new DrawPanel());
-        frame.setSize(1000, 700);
+        frame.setSize((int)(2*(285*0.8 + 20)), 800);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setResizable(true);
