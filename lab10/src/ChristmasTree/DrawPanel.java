@@ -29,15 +29,18 @@ public class DrawPanel extends JPanel{
         b2.y = 100;
         b2.scale = 2;
 
-        Branch b3 = new Branch();
 
+        double s = 1;
+        int i = 100;
+        Branch branch = new Branch((int) (300 + s*-242),i, s,1);
+        shapes.add(branch);
+        Branch branch2 = new Branch((int) (300 + s*332),i, -1*s,1);
+        shapes.add(branch2);
 
-
-        this.shapes.add(b3);
         this.shapes.add(b1);
         this.shapes.add(b2);
-        for(XmasShape s:shapes){
-            s.draw(g2);
+        for(XmasShape shape : shapes){
+            shape.draw(g2);
         }
     }
 }
