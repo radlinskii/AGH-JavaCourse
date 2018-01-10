@@ -49,15 +49,15 @@ public class Main {
 
 */
 
-        double arr [] = {1.338,1.322,1.32,1.3263,1.32,1.32,1.328,1.3287,1.3257,1.3247};
+        double arr [] = {34.8, 33.9, 34.0, 33.9, 33.7, 34.8, 34.2, 34.8, 34.8, 34.8};
         /*double arr [] = {1.026,1.032,1.03,1.036,1.039,1.032,1.03,1.027,1.039,1.039};*/
         double arrayLength = arr.length;
         double pi = 3.14;
         double l = 0.55;
         double UOdEl = 0.00058;
 
-        System.out.println("l = " + l);
-        System.out.println("U(l) = " + UOdEl);
+        //System.out.println("l = " + l);
+        //System.out.println("U(l) = " + UOdEl);
 
         double sum = 0;
         for (double anArr : arr) {
@@ -65,10 +65,10 @@ public class Main {
         }
 
 
-        System.out.println(" ");
-        for (double anArr : arr) {
-            System.out.print(anArr * 30 + " ");
-        }
+        System.out.println((34.68+ 13.78));
+        //for (double anArr : arr) {
+        //    System.out.print(anArr * 30 + " ");
+        //}
         System.out.println(" ");
 
         double mean = sum/arrayLength;
@@ -84,6 +84,7 @@ public class Main {
         double niepewnoscT = Math.sqrt(squareSumDiff/(arrayLength*(arrayLength-1)));
         System.out.println("U(T) = " + niepewnoscT);
 
+/*
 
         double UcOdG = Math.sqrt(
                 (64*Math.pow(pi,4)*Math.pow(l,2))*(Math.pow(niepewnoscT,2))/Math.pow(mean,6) + 16*Math.pow(pi,4)*Math.pow(UOdEl,2)/Math.pow(mean,2)
@@ -147,6 +148,7 @@ public class Main {
                 )
         );
 
+*/
 
 
     }
