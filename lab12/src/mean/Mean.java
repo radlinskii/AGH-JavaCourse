@@ -6,7 +6,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class Mean {
     static double[] array;
-    static BlockingQueue<Double> results = new ArrayBlockingQueue<Double>(100);
+    static BlockingQueue<Double> results = new ArrayBlockingQueue<Double>(129);
 
     static void initArray(int size){
         array = new double[size];
@@ -38,9 +38,6 @@ public class Mean {
         }
         double t2 = System.nanoTime()/1e6;
         // czekaj na ich zakończenie używając metody ''join''
-        for(MeanCalc mc:threads) {
-            mc.join();
-        }
         // oblicz średnią ze średnich
         double mean, sum = 0;
 
@@ -65,7 +62,7 @@ public class Mean {
         //meanCalc.start();
 //        parallelMean(10);
         initArray(128000000);
-        for(int cnt:new int[]{1,2,4,8,16,32,64}){
+        for(int cnt:new int[]{1,2,4,8,16,32,64, 128}){
             parallelMean(cnt);
         }
     }
