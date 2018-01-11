@@ -1,9 +1,12 @@
 package mean;
 
 import java.util.Locale;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 public class Mean {
     static double[] array;
+    static BlockingQueue<Double> results = new ArrayBlockingQueue<Double>(100);
 
     static void initArray(int size){
         array = new double[size];
@@ -41,8 +44,8 @@ public class Mean {
         // oblicz średnią ze średnich
         double mean, sum = 0;
 
-        for(MeanCalc meanCalc : threads){
-            sum += meanCalc.mean;
+        for(int i = 0; i < threads.length; i++){
+            sum += results.take();
         }
         mean = sum/cnt;
         double t3 = System.nanoTime()/1e6;
@@ -57,10 +60,14 @@ public class Mean {
 
 
     public static void main(String[] args) throws InterruptedException {
-        initArray(100000000);
+        //initArray(100000000);
         //MeanCalc meanCalc = new MeanCalc(99999950, 99999999);
         //meanCalc.start();
-        parallelMean(10);
+//        parallelMean(10);
+        initArray(128000000);
+        for(int cnt:new int[]{1,2,4,8,16,32,64}){
+            parallelMean(cnt);
+        }
     }
 
 
@@ -83,7 +90,12 @@ public class Mean {
                 sum += array[i];
             }
             mean = sum/(end-start);
-            System.out.printf(Locale.US,"%d-%d mean=%f\n",start,end,mean);
+            try {
+                results.put(mean);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //System.out.printf(Locale.US,"%d-%d mean=%f\n",start,end,mean);
         }
     }
 }
