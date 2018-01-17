@@ -2,9 +2,8 @@ package CSV;
 
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.function.DoubleConsumer;
 
 public class Main {
@@ -48,10 +47,10 @@ public class Main {
         }
 
 
-        PrintStream out = new PrintStream(System.out);
+        PrintStream out2 = new PrintStream(System.out);
     a.filter(p->p.getName().equals("gmina Jednorożec"))
-                .list(out);
-        out.println();
+                .list(out2);
+        out2.println();
 
         AdminUnitList list = a;
 
@@ -59,9 +58,36 @@ public class Main {
                 .selectFrom(list)
                 .where(el -> el.getParent().getName().contains("Wielka Wie"))
                 .sort((el1, el2) -> (el1.getName().compareTo(el2.getName())))
-                .limit(3);
-        query.execute().list(out);
+                .limit(5);
+        query.execute().list(out2);
 
 
-    }
+        System.out.println();
+        String array [] = {"za", "eaa", "X", "aaaa"};
+        Arrays.asList(array).sort((s1, s2)->Integer.compare(s1.length(), s2.length()));
+        Arrays.stream(array).forEach(i -> System.out.println(i));
+
+        System.out.println();
+        Arrays.asList(array).sort((s1, s2)->Integer.compare(s2.length(), s1.length()));
+        Arrays.stream(array).forEach(i -> System.out.println(i));
+
+        System.out.println();
+        Arrays.asList(array).sort((s1, s2)-> Integer.compare(s1.toLowerCase().charAt(0), s2.toLowerCase().charAt(0)));
+        Arrays.stream(array).forEach(i -> System.out.println(i));
+
+
+        System.out.println();
+        Arrays.asList(array).sort((s1,s2)->myfunc(s1,s2));
+        Arrays.stream(array).forEach(i -> System.out.println(i));
+       }
+
+       static int myfunc(String s1, String s2){
+           if(s1.charAt(0) == 'e' && s2.charAt(0) != 'e'){
+               return -1;
+           } else if(s1.charAt(0) != 'e' && s2.charAt(0) == 'e'){
+               return 1;
+           } else {
+               return 0;
+           }
+       }
 }
