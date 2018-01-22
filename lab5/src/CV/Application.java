@@ -8,7 +8,7 @@ import java.io.UnsupportedEncodingException;
 public class Application {
 
     public static void main(String [] args) throws FileNotFoundException, UnsupportedEncodingException {
-        Document cv = new Document("Jana Kowalski - CV");
+        Document cv = new Document("Jan Kowalski - CV");
         cv.addPhoto("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTndn2xoW2S2ezvFJagOdG_nnhaJy6n1nKDPSU6dXDBM5sRIX9T7A");
         cv.addSection("Wykształcenie")
                 .addParagraph("2000-2005 Przedszkole im. Królewny Snieżki w ...")
