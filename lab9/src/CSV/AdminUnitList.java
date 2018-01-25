@@ -12,10 +12,10 @@ class AdminUnitList {
     }
 
     private List<AdminUnit> units = new ArrayList<>();
-    private Map<AdminUnit,Long> parentIdMap = new HashMap<>();
+    private Map<AdminUnit, Long> parentIdMap = new HashMap<>();
     private Map<Long, AdminUnit> selfIdMap = new HashMap<>();
 
-    private Map<Long,List<AdminUnit>> parentid2child = new HashMap<>();
+    private Map<Long, List<AdminUnit>> parentid2child = new HashMap<>();
 
     public Map<Long, List<AdminUnit>> getParentid2child() {
         return parentid2child;
@@ -50,30 +50,29 @@ class AdminUnitList {
             ID = reader.getLong("id");
 
 
-
             AdminUnit node = new AdminUnit(name, area, admin_level, population, density);
             parentIdMap.put(parentID != -1 ? node : null, parentID);
 
 
-            node.box.addPoint(x1,y1);
-            node.box.addPoint(x2,y2);
-            node.box.addPoint(x3,y3);
-            node.box.addPoint(x4,y4);
+            node.box.addPoint(x1, y1);
+            node.box.addPoint(x2, y2);
+            node.box.addPoint(x3, y3);
+            node.box.addPoint(x4, y4);
 
 
             selfIdMap.put(ID, node);
             units.add(node);
         }
-        for(AdminUnit node : units){
+        for (AdminUnit node : units) {
             AdminUnit parent = selfIdMap.get(parentIdMap.get(node));
             node.setParent(parent);
 
-            if(parent != null){
+            if (parent != null) {
                 parent.children.add(node);
             }
 
         }
-        for(AdminUnit node : units) {
+        for (AdminUnit node : units) {
             node.fixMissingValues();
         }
 
@@ -81,23 +80,26 @@ class AdminUnitList {
 
     /**
      * Wypisuje zawartość korzystając z AdminUnit.toString()
+     *
      * @param out
      */
-    void list(PrintStream out){
+    void list(PrintStream out) {
         for (AdminUnit unit : units) {
             out.println(unit.toString());
         }
     }
+
     /**
      * Wypisuje co najwyżej limit elementów począwszy od elementu o indeksie offset
-     * @param out - strumień wyjsciowy
+     *
+     * @param out    - strumień wyjsciowy
      * @param offset - od którego elementu rozpocząć wypisywanie
-     * @param limit - ile (maksymalnie) elementów wypisać
+     * @param limit  - ile (maksymalnie) elementów wypisać
      */
-    void list(PrintStream out,int offset, int limit ){
+    void list(PrintStream out, int offset, int limit) {
         int index = 0;
         for (AdminUnit unit : units) {
-            if (index>=offset && limit>0){
+            if (index >= offset && limit > 0) {
                 limit--;
                 out.println(unit.toString());
             }
@@ -107,23 +109,24 @@ class AdminUnitList {
 
     /**
      * Zwraca nową listę zawierającą te obiekty AdminUnit, których nazwa pasuje do wzorca
+     *
      * @param pattern - wzorzec dla nazwy
-     * @param regex - jeśli regex=true, użyj finkcji String matches(); jeśli false użyj funkcji contains()
+     * @param regex   - jeśli regex=true, użyj finkcji String matches(); jeśli false użyj funkcji contains()
      * @return podzbiór elementów, których nazwy spełniają kryterium wyboru
      */
-    AdminUnitList selectByName(String pattern, boolean regex){
+    AdminUnitList selectByName(String pattern, boolean regex) {
         AdminUnitList ret = new AdminUnitList();
         // przeiteruj po zawartości units
         // jeżeli nazwa jednostki pasuje do wzorca dodaj do ret
 
         for (AdminUnit unit : units) {
             String name = unit.getName();
-            if(regex){
-                if(name.matches(pattern)){
+            if (regex) {
+                if (name.matches(pattern)) {
                     ret.units.add(unit);
                 }
-            } else  {
-                if(name.contains(pattern)){
+            } else {
+                if (name.contains(pattern)) {
                     ret.units.add(unit);
                 }
             }
@@ -135,21 +138,23 @@ class AdminUnitList {
     /**
      * Zwraca listę jednostek sąsiadujących z jendostką unit na tym samym poziomie hierarchii admin_level.
      * Czyli sąsiadami wojweództw są województwa, powiatów - powiaty, gmin - gminy, miejscowości - inne miejscowości
-     * @param unit - jednostka, której sąsiedzi mają być wyznaczeni
+     *
+     * @param unit        - jednostka, której sąsiedzi mają być wyznaczeni
      * @param maxdistance - parametr stosowany wyłącznie dla miejscowości, maksymalny promień odległości od środka unit,
      *                    w którym mają sie znaleźć punkty środkowe BoundingBox sąsiadów
      * @return lista wypełniona sąsiadami
      */
     AdminUnitList getNeighbors(AdminUnit unit, double maxdistance) throws CantCenterEmptyBoundingBox {
         AdminUnitList neighbors = new AdminUnitList();
-        for(AdminUnit adminUnit : this.units) {
-            if(adminUnit.getAdminLevel() == unit.getAdminLevel()){
-                if(adminUnit.getAdminLevel() >= 8 ){
-                    if(maxdistance >= adminUnit.getBox().distanceTo(unit.getBox())){
-                        neighbors.units.add(adminUnit);
+        for (AdminUnit adminUnit : this.units) {
+            if (adminUnit.getAdminLevel() == unit.getAdminLevel()) {
+                if (adminUnit.getAdminLevel() >= 8) {
+                    if (maxdistance >= adminUnit.getBox().distanceTo(unit.getBox())) {
+                        if (!adminUnit.getName().equals(unit.getName()))
+                            neighbors.units.add(adminUnit);
                     }
                 } else {
-                    if(unit.getBox().intersects(adminUnit.getBox())){
+                    if (unit.getBox().intersects(adminUnit.getBox())) {
                         neighbors.units.add(adminUnit);
                     }
                 }
@@ -158,23 +163,21 @@ class AdminUnitList {
         return neighbors;
     }
 
-    void getNeighbors(AdminUnit unit, AdminUnit target, double maxDistance) throws CantCenterEmptyBoundingBox{
-        if(unit.getParent()== null)
+    void getNeighbors(AdminUnit unit, AdminUnit target, double maxDistance) throws CantCenterEmptyBoundingBox {
+        if (unit.getParent() == null)
             return;
         getNeighbors(unit.getParent(), target, maxDistance);
-        for(AdminUnit sibling: unit.getParent().getChildren()){
+        for (AdminUnit sibling : unit.getParent().getChildren()) {
             System.out.println(sibling.getName());
-            if((sibling.getBox().intersects(target.getBox()) || (sibling.getBox().distanceTo(target.getBox()) < maxDistance)) && sibling.getAdminLevel() == target.getAdminLevel()){
+            if ((sibling.getBox().intersects(target.getBox()) || (sibling.getBox().distanceTo(target.getBox()) < maxDistance) && (sibling.getBox().distanceTo(target.getBox()) > 0)) && sibling.getAdminLevel() == target.getAdminLevel()) {
                 target.neighbours.add(sibling);
             }
         }
     }
 
 
-
-
     AdminUnitList sortInPlaceByName() {
-        class SortByName implements Comparator<AdminUnit>{
+        class SortByName implements Comparator<AdminUnit> {
 
             @Override
             public int compare(AdminUnit o1, AdminUnit o2) {
@@ -185,7 +188,7 @@ class AdminUnitList {
         return this;
     }
 
-    AdminUnitList sortInPlaceByArea(){
+    AdminUnitList sortInPlaceByArea() {
         units.sort(new Comparator<AdminUnit>() {
             @Override
             public int compare(AdminUnit o1, AdminUnit o2) {
@@ -195,24 +198,24 @@ class AdminUnitList {
         return this;
     }
 
-    AdminUnitList sortInPlaceByPopulation(){
-        units.sort((o1,o2) -> Double.compare(o1.getPopulation(), o2.getPopulation()));
+    AdminUnitList sortInPlaceByPopulation() {
+        units.sort((o1, o2) -> Double.compare(o1.getPopulation(), o2.getPopulation()));
         return this;
     }
 
-    AdminUnitList sortInplace(Comparator<AdminUnit> cmp){
+    AdminUnitList sortInplace(Comparator<AdminUnit> cmp) {
         units.sort(cmp);
         return this;
     }
 
-    AdminUnitList sort(Comparator<AdminUnit> cmp){
+    AdminUnitList sort(Comparator<AdminUnit> cmp) {
         AdminUnitList adminUnitList = new AdminUnitList();
         adminUnitList.units = new ArrayList<AdminUnit>(this.getUnits());
         adminUnitList.sortInplace(cmp);
         return adminUnitList;
     }
 
-    AdminUnitList filter(Predicate<AdminUnit> pred){
+    AdminUnitList filter(Predicate<AdminUnit> pred) {
         AdminUnitList adminUnitList = new AdminUnitList();
         adminUnitList.units = this.getUnits().stream().filter(pred).collect(Collectors.toList());
         return adminUnitList;
@@ -220,11 +223,12 @@ class AdminUnitList {
 
     /**
      * Zwraca co najwyżej limit elementów spełniających pred
-     * @param pred - predykat
+     *
+     * @param pred  - predykat
      * @param limit - maksymalna liczba elementów
      * @return nową listę
      */
-    AdminUnitList filter(Predicate<AdminUnit> pred, int limit){
+    AdminUnitList filter(Predicate<AdminUnit> pred, int limit) {
         AdminUnitList newList = new AdminUnitList();
         newList.units = new ArrayList<AdminUnit>(this.units);
         newList.units = units.stream().filter(pred).limit(limit).collect(Collectors.toList());
@@ -234,12 +238,13 @@ class AdminUnitList {
     /**
      * Zwraca co najwyżej limit elementów spełniających pred począwszy od offset
      * Offest jest obliczany po przefiltrowaniu
-     * @param pred - predykat
-     * @param - od którego elementu
+     *
+     * @param pred  - predykat
+     * @param -     od którego elementu
      * @param limit - maksymalna liczba elementów
      * @return nową listę
      */
-    AdminUnitList filter(Predicate<AdminUnit> pred, int offset, int limit){
+    AdminUnitList filter(Predicate<AdminUnit> pred, int offset, int limit) {
         AdminUnitList newList = new AdminUnitList();
         newList.units = new ArrayList<AdminUnit>(this.units);
         newList.units = units.stream().filter(pred).skip(offset).limit(limit).collect(Collectors.toList());

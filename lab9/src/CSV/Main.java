@@ -79,7 +79,13 @@ public class Main {
         System.out.println();
         Arrays.asList(array).sort((s1,s2)->myfunc(s1,s2));
         Arrays.stream(array).forEach(i -> System.out.println(i));
-       }
+
+        a.getNeighbors(modlniczka, modlniczka,5);
+
+        System.out.println("aAAAAAAA\n" + modlniczka.getNeighbours());
+        //System.out.println(a.getNeighbors(modlniczka.getParent(),1).getUnits());
+
+    }
 
        static int myfunc(String s1, String s2){
            if(s1.charAt(0) == 'e' && s2.charAt(0) != 'e'){
@@ -89,5 +95,5 @@ public class Main {
            } else {
                return 0;
            }
-       }
+    }
 }

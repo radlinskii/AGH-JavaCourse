@@ -44,6 +44,11 @@ public class AdminUnit {
 
     BoundingBox box = new BoundingBox();
     List<AdminUnit> children = new ArrayList<>();
+
+    public List<AdminUnit> getNeighbours() {
+        return neighbours;
+    }
+
     List<AdminUnit> neighbours = new ArrayList<>();
     AdminUnit(String name, double area, int admin_level, double population, double density) {
         this.name = name;
