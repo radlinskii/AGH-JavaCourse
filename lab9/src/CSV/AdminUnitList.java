@@ -168,7 +168,7 @@ class AdminUnitList {
             return;
         getNeighbors(unit.getParent(), target, maxDistance);
         for (AdminUnit sibling : unit.getParent().getChildren()) {
-            System.out.println(sibling.getName());
+            //System.out.println(sibling.getName());
             if ((sibling.getBox().intersects(target.getBox()) || (sibling.getBox().distanceTo(target.getBox()) < maxDistance) && (sibling.getBox().distanceTo(target.getBox()) > 0)) && sibling.getAdminLevel() == target.getAdminLevel()) {
                 target.neighbours.add(sibling);
             }
