@@ -18,10 +18,9 @@ class UnorderedList {
     }
 
     void writeHTML(PrintStream out) {
-        out.printf("<ul>\n");
-        for (ListItem i : list) {
+        out.print("<ul>\n");
+        for (ListItem i : list)
             i.writeHTML(out);
-        }
-        out.printf("</ul>\n");
+        out.print("</ul>\n");
     }
 }

@@ -24,7 +24,6 @@ public class Application {
 
 
         try {
-            //PrintWriter writer = new PrintWriter("cv.html", "UTF-8");
 
             PrintStream writeToCV = new PrintStream(
                     new FileOutputStream("cv.html", false));

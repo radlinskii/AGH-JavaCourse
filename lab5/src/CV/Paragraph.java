@@ -17,7 +17,7 @@ class Paragraph {
     }
 
     void writeHTML(PrintStream out){
-        out.printf("<p>\n" + content + "\n</p>\n");
+        out.print("<p>\n" + content + "\n</p>\n");
     }
 
 }
