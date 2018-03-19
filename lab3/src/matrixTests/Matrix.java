@@ -1,4 +1,4 @@
-package macierzeTestowanie;
+package matrixTests;
 
 import java.util.Random;
 

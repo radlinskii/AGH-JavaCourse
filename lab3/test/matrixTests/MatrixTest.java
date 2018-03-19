@@ -1,4 +1,4 @@
-package macierzeTestowanie;
+package matrixTests;
 
 import org.junit.Test;
 
