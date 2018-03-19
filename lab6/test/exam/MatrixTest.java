@@ -1,4 +1,4 @@
-package kartkowka;
+package exam;
 
 import org.junit.Test;
 
