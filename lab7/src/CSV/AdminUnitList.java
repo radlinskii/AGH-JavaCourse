@@ -98,8 +98,6 @@ class AdminUnitList {
      */
     AdminUnitList selectByName(String pattern, boolean regex){
         AdminUnitList ret = new AdminUnitList();
-        // przeiteruj po zawartości units
-        // jeżeli nazwa jednostki pasuje do wzorca dodaj do ret
 
         for (AdminUnit unit : units) {
             String name = unit.getName();
