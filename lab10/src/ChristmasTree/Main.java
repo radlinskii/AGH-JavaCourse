@@ -4,8 +4,7 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        // write your code here
-        JFrame frame = new JFrame("Choinka");
+        JFrame frame = new JFrame("Christmas Tree");
         frame.setContentPane(new DrawPanel());
         frame.setSize((int)(2*(285*0.8 + 20)), 800);
         frame.setLocationRelativeTo(null);
