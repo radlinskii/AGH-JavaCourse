@@ -248,7 +248,7 @@ public class Matrix {
     }
 
 
-    //// KARTKÓWKA GRUPA B /////
+    //// EXAM CODE GROUP B /////
 
 
     public Matrix getTransposition(){
@@ -263,7 +263,7 @@ public class Matrix {
         return result;
     }
 
-    //// KONIEC KARTKÓWKI /////
+    //// EXAM CODE END /////
 
     public static void main(String[] args) {
         double[][] d = {{1, 2, 3, 4}, {5, 6, 7}, {6, 3, 2, 1}};
@@ -271,26 +271,11 @@ public class Matrix {
         double[][] d1 = {{1, 1, 1, 1}, {5, 6, 7}, {6, 3, 2, 1}};
         Matrix M1 = new Matrix(d1);
 
-        //System.out.println(M.toString());
-        /*try {
-            System.out.println(M.div(0).toString());
-        } catch (DivisionByZeroException error) {
-            System.out.println(error.getMessage());
-        }
-
-        System.out.println(Matrix.random(3,3));
-        System.out.println(Matrix.eye(3));
-        System.out.println("wooo");*/
-        //System.out.println(M.getTransposition().toString());
-
-
         Random r = new Random();
         int m = r.nextInt(100)+1;
         int n = r.nextInt(100)+1;
 
         Matrix M3 = Matrix.random(m,n);
         System.out.println(m + "  "+ n);
-
-
     }
 }
