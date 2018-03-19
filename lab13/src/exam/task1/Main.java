@@ -1,4 +1,4 @@
-package kolokwium.zad1;
+package exam.task1;
 
 import java.io.IOException;
 

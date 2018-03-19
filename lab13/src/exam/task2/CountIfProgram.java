@@ -1,4 +1,4 @@
-package kolokwium.zad2;
+package exam.task2;
 
 import java.util.Arrays;
 import java.util.Locale;
@@ -20,24 +20,17 @@ public class CountIfProgram {
         }
     }
 
-
-    /**
-     * Oblicza średnią wartości elementów tablicy array uruchamiając równolegle działające wątki.
-     * Wypisuje czasy operacji
-     * @param cnt - liczba wątków
-     */
     static void parallelCountIf(int cnt, IntPredicate pred) throws InterruptedException {
-        // utwórz tablicę wątków
+
         CountIf threads[]=new CountIf[cnt];
         int block  = array.length / cnt;
         for(int i = 0, start = 0; i < cnt; i++){
             threads[i] = new CountIf(start, start + block, pred);
             start += block;
         }
-        // utwórz wątki, podziel tablice na równe bloki i przekaż indeksy do wątków
-        // załóż, że array.length dzieli się przez cnt)
+
         double t1 = System.nanoTime()/1e6;
-        //uruchom wątki
+
         for(CountIf thread : threads){
             thread.start();
         }
