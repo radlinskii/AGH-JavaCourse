@@ -21,11 +21,7 @@ public class Application {
                                 .addListItem("C++")
                                 .addListItem("Java")
                 );
-
-
         try {
-            //PrintWriter writer = new PrintWriter("cv.html", "UTF-8");
-
             PrintStream writeToCV = new PrintStream(
                     new FileOutputStream("cv.html", false));
             cv.writeHTML(writeToCV);

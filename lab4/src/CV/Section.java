@@ -37,11 +37,11 @@ class Section {
         if (paragraphs.isEmpty())
             return;
 
-        out.printf("<section>");
+        out.print("<section>");
         out.printf("\n<h2> %s </h2>\n",title);
         for (Paragraph p : paragraphs) {
             p.writeHTML(out);
         }
-        out.printf("</section>\n");
+        out.print("</section>\n");
     }
 }

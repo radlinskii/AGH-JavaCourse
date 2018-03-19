@@ -24,7 +24,6 @@ class Document {
     }
 
     Section addSection(String sectionTitle){
-        // utwórz sekcję o danym tytule i dodaj do sections
         Section newSection = new Section(sectionTitle);
         newSection.setTitle(sectionTitle);
         sections.add(newSection);
@@ -38,9 +37,6 @@ class Document {
 
 
     void writeHTML(PrintStream out){
-        // zapisz niezbędne znaczniki HTML
-        // dodaj tytuł i obrazek
-        // dla każdej sekcji wywołaj section.writeHTML(out)
         out.printf("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
@@ -55,7 +51,7 @@ class Document {
             s.writeHTML(out);
         }
 
-        out.printf("</body>\n" +
+        out.print("</body>\n" +
                 "</html>");
     }
 }
