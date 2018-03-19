@@ -15,12 +15,6 @@ public class Mean {
         }
     }
 
-
-    /**
-     * Oblicza średnią wartości elementów tablicy array uruchamiając równolegle działające wątki.
-     * Wypisuje czasy operacji
-     * @param cnt - liczba wątków
-     */
     static void parallelMean(int cnt) throws InterruptedException {
         // utwórz tablicę wątków
         MeanCalc threads[]=new MeanCalc[cnt];
@@ -29,16 +23,14 @@ public class Mean {
             threads[i] = new MeanCalc(start, start + block);
             start += block;
         }
-        // utwórz wątki, podziel tablice na równe bloki i przekaż indeksy do wątków
-        // załóż, że array.length dzieli się przez cnt)
+
         double t1 = System.nanoTime()/1e6;
-        //uruchom wątki
+
         for(MeanCalc thread : threads){
             thread.start();
         }
         double t2 = System.nanoTime()/1e6;
-        // czekaj na ich zakończenie używając metody ''join''
-        // oblicz średnią ze średnich
+
         double mean, sum = 0;
 
         for(int i = 0; i < threads.length; i++){
@@ -57,10 +49,7 @@ public class Mean {
 
 
     public static void main(String[] args) throws InterruptedException {
-        //initArray(100000000);
-        //MeanCalc meanCalc = new MeanCalc(99999950, 99999999);
-        //meanCalc.start();
-//        parallelMean(10);
+
         initArray(128000000);
         for(int cnt:new int[]{1,2,4,8,16,32,64, 128}){
             parallelMean(cnt);
@@ -81,7 +70,7 @@ public class Mean {
             this.end = end;
         }
         public void run(){
-            // ??? liczymy średnią
+
             double sum =0;
             for(int i = start;i < end; i++){
                 sum += array[i];
@@ -92,7 +81,6 @@ public class Mean {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            //System.out.printf(Locale.US,"%d-%d mean=%f\n",start,end,mean);
         }
     }
 }

@@ -20,11 +20,6 @@ public class InternalPanelAgent extends Thread{
 
     public void run(){
         for(;;){
-            // odczytaj wezwanie z kolejki
-            // w zależności od aktualnego piętra, na którym jest winda,
-            // umieść przystanek w odpowiedniej tablicy ''EleveatorStops''
-
-
             InternalCall ic = null;
             try {
                 ic = input.take();

@@ -28,9 +28,7 @@ public class ExternalPanelsAgent extends Thread{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            // ignorujemy wezwanie na piętro, na którym winda się znajduje
             if(ec.atFloor==elevatorCar.getFloor())continue;
-            // dodajemy do jednej z tablic zgłoszeń
             if(ec.directionUp){
                 ElevatorStops.get().setLiftStopUp(ec.atFloor);
             }else{
