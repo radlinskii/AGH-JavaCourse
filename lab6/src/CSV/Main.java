@@ -13,7 +13,7 @@ public class Main {
             double fare = reader.getDouble("Fare");
             String name = reader.get("Name");
             LocalTime date = reader.getTime("Date", "HH:mm:ss");
-            System.out.printf(fare + " " + name + " " + date.toString() +  "\n");
+            System.out.print(fare + " " + name + " " + date.toString() +  "\n");
             index ++;
         }
 
