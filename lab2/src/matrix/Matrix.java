@@ -1,4 +1,4 @@
-package macierze;
+package matrix;
 
 import java.util.Random;
 
