@@ -1,4 +1,4 @@
-package kartkowka;
+package exam;
 
 import java.util.Random;
 

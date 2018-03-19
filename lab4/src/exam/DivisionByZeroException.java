@@ -1,4 +1,4 @@
-package kartkowka;
+package exam;
 
 public class DivisionByZeroException extends Exception {
     public DivisionByZeroException(String reason, String statement){
