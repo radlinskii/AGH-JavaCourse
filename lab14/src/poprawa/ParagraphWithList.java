@@ -28,9 +28,9 @@ public class ParagraphWithList extends Paragraph {
     }
 
     void writeHTML(PrintStream out){
-        out.printf("<p>\n");
+        out.print("<p>\n");
         unorderedList.writeHTML(out);
-        out.printf("</p>\n");
+        out.print("</p>\n");
     }
 
 

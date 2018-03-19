@@ -14,10 +14,5 @@ public class Main {
             e.printStackTrace();
         }
         a.writeRootsHTML();
-        //a.writeHTML();
-
     }
-
-
-
 }

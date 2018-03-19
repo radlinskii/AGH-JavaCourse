@@ -16,9 +16,6 @@ public class Document {
     private String title;
     @XmlElement(name="section")
     private List<Section> sections = new ArrayList<>();
-    @XmlElement
-    private Photo photo;
-
 
     Document(){}
 
@@ -28,11 +25,6 @@ public class Document {
 
     Document setTitle(String title){
         this.title = title;
-        return this;
-    }
-
-    public Document addPhoto(String photoUrl){
-        photo = new Photo(photoUrl);
         return this;
     }
 
@@ -51,9 +43,6 @@ public class Document {
 
 
     public void writeHTML(PrintStream out){
-        // zapisz niezbędne znaczniki HTML
-        // dodaj tytuł i obrazek
-        // dla każdej sekcji wywołaj section.writeHTML(out)
         out.printf("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
@@ -67,7 +56,7 @@ public class Document {
             s.writeHTML(out);
         }
 
-        out.printf("</body>\n" +
+        out.print("</body>\n" +
                 "</html>");
     }
 

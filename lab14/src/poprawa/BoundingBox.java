@@ -6,11 +6,6 @@ public class BoundingBox {
     Double xmax;
     Double ymax;
 
-    /**
-     * Powiększa BB tak, aby zawierał punkt (x,y)
-     * @param x - współrzędna x
-     * @param y - współrzędna y
-     */
     void addPoint(double x, double y){
         if(xmin != null){
             if(xmin > x)
@@ -39,41 +34,21 @@ public class BoundingBox {
 
     }
 
-    /**
-     * Sprawdza, czy BB zawiera punkt (x,y)
-     * @param x
-     * @param y
-     * @return
-     */
     boolean contains(double x, double y){
         return ((x<=xmax) && (x >= xmin) && (ymax >= y) && (ymin <= y));
     }
 
-    /**
-     * Sprawdza czy dany BB zawiera bb
-     * @param bb
-     * @return
-     */
     boolean contains(BoundingBox bb) {
         return ((bb.xmax <= xmax) && (bb.xmin >= xmin) && (ymax >= bb.ymax) && (ymin <= bb.ymin));
     }
 
-    /**
-     * Sprawdza, czy dany BB przecina się z bb
-     * @param bb
-     * @return
-     */
     boolean intersects(BoundingBox bb){
         return (contains(bb.xmax, bb.ymax) || contains(bb.xmin, bb.ymin)
                 || contains(bb.xmax, bb.ymin) || contains(bb.xmin, bb.ymax))
                 && (!contains(bb.xmax, bb.ymax) || !contains(bb.xmin, bb.ymin)
                 || !contains(bb.xmax, bb.ymin) || !contains(bb.xmin, bb.ymax));
     }
-    /**
-     * Powiększa rozmiary tak, aby zawierał bb oraz poprzednią wersję this
-     * @param bb
-     * @return
-     */
+
     BoundingBox add(BoundingBox bb){
         if(!bb.isEmpty()) {
             this.addPoint(bb.xmax, bb.ymax);
@@ -83,30 +58,18 @@ public class BoundingBox {
         }
         return this;
     }
-    /**
-     * Sprawdza czy BB jest pusty
-     * @return
-     */
+
     boolean isEmpty(){
         return xmax == null || xmin == null || ymax == null || ymin == null;
     }
 
-    /**
-     * Oblicza i zwraca współrzędną x środka
-     * @return if !isEmpty() współrzędna x środka else wyrzuca wyjątek
-     * (sam dobierz typ)
-     */
     double getCenterX() throws CantCenterEmptyBoundingBox{
         if(!isEmpty()){
             return xmax-((xmax - xmin)/2);
         } else
             throw new CantCenterEmptyBoundingBox("Empty on Xcenter");
     }
-    /**
-     * Oblicza i zwraca współrzędną y środka
-     * @return if !isEmpty() współrzędna y środka else wyrzuca wyjątek
-     * (sam dobierz typ)
-     */
+
     double getCenterY() throws CantCenterEmptyBoundingBox {
         if(!isEmpty()){
             return ymax-((ymax - ymin)/2);
@@ -114,13 +77,6 @@ public class BoundingBox {
             throw new CantCenterEmptyBoundingBox("Empty on Ycenter");
     }
 
-    /**
-     * Oblicza odległość pomiędzy środkami this bounding box oraz bbx
-     * @param bbx prostokąt, do którego liczona jest odległość
-     * @return if !isEmpty odległość, else wyrzuca wyjątek lub zwraca maksymalną możliwą wartość double
-     * Ze względu na to, że są to współrzędne geograficzne, zamiast odległosci euklidesowej możesz użyć wzoru haversine
-     * (ang. haversine formula)
-     */
     double distanceTo(BoundingBox bbx) throws CantCenterEmptyBoundingBox {
         return Math.sqrt(Math.pow((getCenterX()-bbx.getCenterX()),2)
                 + Math.pow((getCenterY()-bbx.getCenterY()),2))*111;
@@ -138,7 +94,5 @@ public class BoundingBox {
                 xmin + " " + ymin + ", " +
                 xmin + " " + ymax + ", " +
                 xmax + " " + ymax + ")";
-
     }
-
 }
