@@ -1,4 +1,4 @@
-package zad3;
+package task3;
 
 import java.util.Scanner;
 
@@ -7,7 +7,7 @@ public class Problem610A {
 
         Scanner scan = new Scanner(System.in);
         int stickLength = scan.nextInt();
-        System.out.printf("Wczytano %d \n",stickLength);
+        System.out.printf("%d Written\n",stickLength);
 
         int count = 0;
         if(stickLength % 2 == 0){

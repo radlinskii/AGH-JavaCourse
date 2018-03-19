@@ -1,4 +1,4 @@
-package zad2;
+package task2;
 
 import java.util.Scanner;
 
@@ -8,7 +8,7 @@ public class Fibo {
 
         Scanner scan = new Scanner(System.in);
         int n = scan.nextInt();
-        System.out.printf("Wczytano %d \n",n);
+        System.out.printf("%d Written\n",n);
 
         if(n > 1 && n < 45){
 
