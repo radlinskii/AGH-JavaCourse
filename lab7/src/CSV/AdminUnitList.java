@@ -64,21 +64,13 @@ class AdminUnitList {
 
     }
 
-    /**
-     * Wypisuje zawartość korzystając z AdminUnit.toString()
-     * @param out
-     */
+
     void list(PrintStream out){
         for (AdminUnit unit : units) {
             out.println(unit.toString());
         }
     }
-    /**
-     * Wypisuje co najwyżej limit elementów począwszy od elementu o indeksie offset
-     * @param out - strumień wyjsciowy
-     * @param offset - od którego elementu rozpocząć wypisywanie
-     * @param limit - ile (maksymalnie) elementów wypisać
-     */
+
     void list(PrintStream out,int offset, int limit ){
         int index = 0;
         for (AdminUnit unit : units) {
@@ -90,12 +82,6 @@ class AdminUnitList {
         }
     }
 
-    /**
-     * Zwraca nową listę zawierającą te obiekty AdminUnit, których nazwa pasuje do wzorca
-     * @param pattern - wzorzec dla nazwy
-     * @param regex - jeśli regex=true, użyj finkcji String matches(); jeśli false użyj funkcji contains()
-     * @return podzbiór elementów, których nazwy spełniają kryterium wyboru
-     */
     AdminUnitList selectByName(String pattern, boolean regex){
         AdminUnitList ret = new AdminUnitList();
 
