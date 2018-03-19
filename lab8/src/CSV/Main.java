@@ -9,7 +9,7 @@ import java.util.function.DoubleConsumer;
 
 public class Main {
     public static void main(String[] args) throws CantCenterEmptyBoundingBox {
-        /*AdminUnitList a = new AdminUnitList();
+        AdminUnitList a = new AdminUnitList();
         try {
             a.read("admin-units.csv");
         } catch (IOException e) {
@@ -32,7 +32,6 @@ public class Main {
             System.out.println(modlniczka.getBox().distanceTo(modlnica.getBox()));
         }
 
-
         System.out.println(o.getUnits().get(0).children.get(6).getBox().toLINESTRING());
 
         try {
@@ -46,35 +45,6 @@ public class Main {
         } catch (CantCenterEmptyBoundingBox cantCenterEmptyBoundingBox) {
             cantCenterEmptyBoundingBox.printStackTrace();
         }
-
-*/
-
-        double arr [] = {2.39,2.44,2.45,2.38,2.43,2.38,2.39,2.43,2.45,2.46};
-        /*double arr [] = {1.026,1.032,1.03,1.036,1.039,1.032,1.03,1.027,1.039,1.039};*/
-        double arrayLength = arr.length;
-
-        System.out.println(3.80/2.42);
-        System.out.println((2.44-2.42)/2.44);
-        //System.out.println("U(l) = " + UOdEl);
-
-        double sum = 0;
-        for (double anArr : arr) {
-            sum += anArr;
-        }
-
-        double mean = sum/arrayLength;
-        System.out.println("T = " + mean);
-
-        double squareSumDiff = 0;
-
-        for (double anArr : arr) {
-            squareSumDiff += Math.pow(anArr - mean,2);
-            //System.out.println(String.format( "%.4f", squareSumDiff));
-        }
-
-        double niepewnoscT = Math.sqrt(squareSumDiff/(arrayLength*(arrayLength-1)));
-        System.out.println("U(T) = " + niepewnoscT);
-
 
     }
 }
