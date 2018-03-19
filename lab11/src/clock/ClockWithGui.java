@@ -38,20 +38,19 @@ public class ClockWithGui extends JPanel {
             g2d.drawString(Integer.toString(i),(int)trg.getX()-6,(int)trg.getY()+3);
         }
 
-        for(int i=1;i<61;i++){
+        for(int i=1;i<61;i++) {
             AffineTransform at = new AffineTransform();
-            at.rotate(2*Math.PI/60*i);
-            Point2D src = new Point2D.Float(0,-120);
+            at.rotate(2 * Math.PI / 60 * i);
+            Point2D src = new Point2D.Float(0, -120);
             Point2D trg = new Point2D.Float();
-            at.transform(src,trg);
-            if(i%5==0){
+            at.transform(src, trg);
+            if (i % 5 == 0) {
                 g2d.setStroke(new BasicStroke(4));
             } else {
                 g2d.setStroke(new BasicStroke(2));
             }
 
-            g2d.drawLine(((int)((trg.getX())*0.9)),(int)((trg.getY())*0.9 ),((int)((trg.getX())*0.8)),((int)((trg.getY())*0.8)));
-            //g2d.drawString(Integer.toString(i),(int)trg.getX(),(int)trg.getY());
+            g2d.drawLine(((int) ((trg.getX()) * 0.9)), (int) ((trg.getY()) * 0.9), ((int) ((trg.getX()) * 0.8)), ((int) ((trg.getY()) * 0.8)));
         }
 
         AffineTransform saveAT = g2d.getTransform();

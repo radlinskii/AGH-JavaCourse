@@ -39,11 +39,6 @@ public class DownloadExample {
         }
     }
 
-
-
-
-
-
     static class Downloader implements Runnable{
         private final String url;
 
@@ -52,7 +47,6 @@ public class DownloadExample {
         }
 
         public void run(){
-
 
                 String fileName = url.substring(url.lastIndexOf("/")+1);//nazwa pliku z url
 
