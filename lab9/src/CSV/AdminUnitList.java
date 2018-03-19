@@ -78,24 +78,13 @@ class AdminUnitList {
 
     }
 
-    /**
-     * Wypisuje zawartość korzystając z AdminUnit.toString()
-     *
-     * @param out
-     */
     void list(PrintStream out) {
         for (AdminUnit unit : units) {
             out.println(unit.toString());
         }
     }
 
-    /**
-     * Wypisuje co najwyżej limit elementów począwszy od elementu o indeksie offset
-     *
-     * @param out    - strumień wyjsciowy
-     * @param offset - od którego elementu rozpocząć wypisywanie
-     * @param limit  - ile (maksymalnie) elementów wypisać
-     */
+
     void list(PrintStream out, int offset, int limit) {
         int index = 0;
         for (AdminUnit unit : units) {
@@ -107,13 +96,6 @@ class AdminUnitList {
         }
     }
 
-    /**
-     * Zwraca nową listę zawierającą te obiekty AdminUnit, których nazwa pasuje do wzorca
-     *
-     * @param pattern - wzorzec dla nazwy
-     * @param regex   - jeśli regex=true, użyj finkcji String matches(); jeśli false użyj funkcji contains()
-     * @return podzbiór elementów, których nazwy spełniają kryterium wyboru
-     */
     AdminUnitList selectByName(String pattern, boolean regex) {
         AdminUnitList ret = new AdminUnitList();
         // przeiteruj po zawartości units
@@ -134,16 +116,6 @@ class AdminUnitList {
         return ret;
     }
 
-
-    /**
-     * Zwraca listę jednostek sąsiadujących z jendostką unit na tym samym poziomie hierarchii admin_level.
-     * Czyli sąsiadami wojweództw są województwa, powiatów - powiaty, gmin - gminy, miejscowości - inne miejscowości
-     *
-     * @param unit        - jednostka, której sąsiedzi mają być wyznaczeni
-     * @param maxdistance - parametr stosowany wyłącznie dla miejscowości, maksymalny promień odległości od środka unit,
-     *                    w którym mają sie znaleźć punkty środkowe BoundingBox sąsiadów
-     * @return lista wypełniona sąsiadami
-     */
     AdminUnitList getNeighbors(AdminUnit unit, double maxdistance) throws CantCenterEmptyBoundingBox {
         AdminUnitList neighbors = new AdminUnitList();
         for (AdminUnit adminUnit : this.units) {
@@ -221,13 +193,6 @@ class AdminUnitList {
         return adminUnitList;
     }
 
-    /**
-     * Zwraca co najwyżej limit elementów spełniających pred
-     *
-     * @param pred  - predykat
-     * @param limit - maksymalna liczba elementów
-     * @return nową listę
-     */
     AdminUnitList filter(Predicate<AdminUnit> pred, int limit) {
         AdminUnitList newList = new AdminUnitList();
         newList.units = new ArrayList<AdminUnit>(this.units);
@@ -235,21 +200,10 @@ class AdminUnitList {
         return newList;
     }
 
-    /**
-     * Zwraca co najwyżej limit elementów spełniających pred począwszy od offset
-     * Offest jest obliczany po przefiltrowaniu
-     *
-     * @param pred  - predykat
-     * @param -     od którego elementu
-     * @param limit - maksymalna liczba elementów
-     * @return nową listę
-     */
     AdminUnitList filter(Predicate<AdminUnit> pred, int offset, int limit) {
         AdminUnitList newList = new AdminUnitList();
         newList.units = new ArrayList<AdminUnit>(this.units);
         newList.units = units.stream().filter(pred).skip(offset).limit(limit).collect(Collectors.toList());
         return newList;
     }
-
-
 }
